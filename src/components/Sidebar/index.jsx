@@ -11,19 +11,15 @@ export const Sidebar = () => {
     <>
       <aside className="flex flex-col gap-4 w-36 h-screen border-r-2 border-gray-300 mt-1">
         <NavLink to="/" className={styles}>
-          <span class="material-symbols-outlined">home</span>
+          <span className="material-symbols-outlined">home</span>
           <span>Home</span>
         </NavLink>
         <NavLink to="/archive" className={styles}>
-          <span class="material-symbols-outlined">archive</span>
+          <span className="material-symbols-outlined">archive</span>
           <span>Archive</span>
         </NavLink>
-        <NavLink to="/important" className={styles}>
-          <span class="material-symbols-outlined">star</span>
-          <span>Important</span>
-        </NavLink>
         <NavLink to="/bin" className={styles}>
-          <span class="material-symbols-outlined">delete</span>
+          <span className="material-symbols-outlined">delete</span>
           <span>Bin</span>
         </NavLink>
       </aside>

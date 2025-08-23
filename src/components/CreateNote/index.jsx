@@ -44,7 +44,7 @@ function CreateNote() {
               onChange={onTextChange}
             />
             <button disabled={!title || !text} onClick={onAddClick} className="absolute bottom-0 right-0">
-              <span class="material-symbols-outlined">send</span>
+              <span className="material-symbols-outlined">send</span>
             </button>
           </div>
         </div>

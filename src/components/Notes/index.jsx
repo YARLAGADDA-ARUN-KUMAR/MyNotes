@@ -1,10 +1,12 @@
 import React from "react";
 import { useAppContext } from "../../context/appContext";
 
-function Notes() {
-  const { title, text, notes, notesDispatch } = useAppContext();
+function Notes({ id, title, text, isPinned }) {
+  const { archive, notesDispatch } = useAppContext();
 
-  const onPinClick = (id, isPinned) => {
+  const isArchived = archive.some((note) => note.id === id);
+
+  const onPinClick = () => {
     !isPinned
       ? notesDispatch({
           type: "PIN",
@@ -16,85 +18,41 @@ function Notes() {
         });
   };
 
-  const pinnedNotes =
-    notes?.length > 0 ? notes.filter(({ isPinned }) => isPinned) : [];
-  const unPinnedNotes =
-    notes?.length > 0 ? notes.filter(({ isPinned }) => !isPinned) : [];
+  const onArchiveClick = () => {
+    !isArchived
+      ? notesDispatch({
+          type: "ARCHIVE",
+          payload: { id },
+        })
+      : notesDispatch({
+          type: "REMOVE_FROM_ARCHIVE",
+          payload: { id },
+        });
+  };
 
   return (
-    <div className="ml-10">
-      {pinnedNotes?.length > 0 && (
-        <div className="flex mt-14 flex-col">
-          <h1 className="font-bold h-fit">Pinned Notes</h1>
-          <div className="mt-5 flex flex-wrap gap-6">
-            {pinnedNotes?.length > 0 &&
-              pinnedNotes.map(({ id, text, title, isPinned }) => (
-                <div
-                  key={id}
-                  className="w-[300px] border-2 border-gray-400 p-2 rounded-md h-fit"
-                >
-                  <div className="flex justify-between border-b-2">
-                    <p>{title}</p>
-                    <button onClick={() => onPinClick(id, isPinned)}>
-                      <span className="material-symbols-outlined">keep</span>
-                    </button>
-                  </div>
-                  <div className="flex flex-col">
-                    <p>{text}</p>
-                    <div className="ml-auto flex gap-2">
-                      <button>
-                        <span className="material-symbols-outlined">
-                          archive
-                        </span>
-                      </button>
-                      <button>
-                        <span className="material-symbols-outlined">
-                          delete
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
+    <div className="w-[300px] border-2 border-gray-400 p-2 rounded-md h-fit">
+      <div className="flex justify-between border-b-2">
+        <p>{title}</p>
+        {!isArchived ? (
+          <button onClick={onPinClick}>
+            <span className="material-symbols-outlined">keep</span>
+          </button>
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className="flex flex-col">
+        <p>{text}</p>
+        <div className="ml-auto flex gap-2">
+          <button onClick={onArchiveClick}>
+            <span className="material-symbols-outlined">archive</span>
+          </button>
+          <button>
+            <span className="material-symbols-outlined">delete</span>
+          </button>
         </div>
-      )}
-      {unPinnedNotes?.length > 0 && (
-        <div className="flex mt-8 flex-col">
-          <h1 className="font-bold h-fit">Other Notes</h1>
-          <div className="mt-5 flex flex-wrap gap-6">
-            {unPinnedNotes?.length > 0 &&
-              unPinnedNotes.map(({ id, text, title, isPinned }) => (
-                <div
-                  key={id}
-                  className="w-[300px] border-2 border-gray-400 p-2 rounded-md h-fit"
-                >
-                  <div className="flex justify-between border-b-2">
-                    <p>{title}</p>
-                    <button onClick={() => onPinClick(id, isPinned)}>
-                      <span className="material-symbols-outlined">keep</span>
-                    </button>
-                  </div>
-                  <div className="flex flex-col">
-                    <p>{text}</p>
-                    <div className="ml-auto flex gap-2">
-                      <button>
-                        <span className="material-symbols-outlined">
-                          archive
-                        </span>
-                      </button>
-                      <button>
-                        <span className="material-symbols-outlined">
-                          delete
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
