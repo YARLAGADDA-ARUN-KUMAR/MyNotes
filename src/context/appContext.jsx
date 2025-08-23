@@ -7,10 +7,12 @@ export const AppContextProvider = ({children}) =>{
     const initialState = {
     title : "",
     text : "",
-    notes : []
+    notes : [],
+    pinnedNotes: [],
+    unPinnedNotes: []
   }
 
-  const [{title,text,notes},notesDispatch] = useReducer(notesReducer,initialState)
+  const [{title,text,notes,pinnedNotes,unPinnedNotes},notesDispatch] = useReducer(notesReducer,initialState)
 
   return (
     <AppContext.Provider value={{title,text,notes,notesDispatch}}>

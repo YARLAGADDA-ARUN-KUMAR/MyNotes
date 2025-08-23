@@ -26,22 +26,21 @@ function CreateNote() {
       type : "ADD_NOTES"
     })
   }
-
-  console.log(notes)
+  
   return (
-    <div>
-          <div className="flex flex-col w-[300px] gap-0.5 relative">
+    <div className='h-fit w-screen flex  mt-4 justify-center items-center'>
+          <div className="flex flex-col w-[450px] gap-1 relative border-2 rounded-md  ">
             <input
               value={title}
               type="text"
               placeholder="Enter Title"
               onChange={onTitleChange}
-              className="border-2 p-0.5 rounded-[5px]"
+              className=" p-1 border-none"
             />
             <textarea
               value={text}
               placeholder="Enter Text"
-              className="border-2 p-0.5 rounded-[5px]"
+              className="border-none p-1 h-[100px]"
               onChange={onTextChange}
             />
             <button disabled={!title || !text} onClick={onAddClick} className="absolute bottom-0 right-0">
