@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Home } from "../../pages/Home";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export const Sidebar = () => {
   const styles = ({ isActive }) => {
@@ -11,15 +12,15 @@ export const Sidebar = () => {
     <>
       <aside className="flex flex-col gap-4 w-36 h-screen border-r-2 border-gray-300 mt-1">
         <NavLink to="/" className={styles}>
-          <span className="material-symbols-outlined">home</span>
+          <i className="bi bi-house-door-fill"></i>
           <span>Home</span>
         </NavLink>
         <NavLink to="/archive" className={styles}>
-          <span className="material-symbols-outlined">archive</span>
+          <i className="bi bi-archive-fill"></i>
           <span>Archive</span>
         </NavLink>
         <NavLink to="/bin" className={styles}>
-          <span className="material-symbols-outlined">delete</span>
+          <i className="bi bi-trash-fill"></i>
           <span>Bin</span>
         </NavLink>
       </aside>

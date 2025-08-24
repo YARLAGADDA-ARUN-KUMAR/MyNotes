@@ -1,16 +1,8 @@
 import React from "react";
 import { useAppContext } from "../../context/appContext";
 
-const initialState = {
-  notes: [],
-  archive: [],
-  bin: [],
-  title: "",
-  text: "",
-};
-
 function Notes({ id, title, text, isPinned }) {
-  const { archive, bin, notesDispatch } = useAppContext();
+  const { archive, bin, notes, date, notesDispatch } = useAppContext();
 
   const isArchived = archive.some((note) => note.id === id);
   const isRemoved = bin.some((note) => note.id === id);
@@ -51,13 +43,20 @@ function Notes({ id, title, text, isPinned }) {
         });
   };
 
+  const archiveToBinClick = () => {
+    notesDispatch({
+      type: "ARCHIVE_TO_BIN",
+      payload: { id },
+    });
+  };
+
   return (
-    <div className="w-[300px] border-2 border-gray-400 p-2 rounded-md h-fit">
+    <div className="min-w-[300px] border-2 border-gray-400 px-2 rounded-md h-fit">
       <div className="flex justify-between border-b-2">
         <p>{title}</p>
-        {!isArchived ? (
-          <button onClick={onPinClick}>
-            <span className="material-symbols-outlined">keep</span>
+        {!isArchived && !isRemoved ? (
+          <button onClick={onPinClick} className="hover:scale-105">
+            <i style={{ fontSize: "1.5rem" , padding: "0rem 0rem 0rem 1rem" }} className={isPinned ? "bi bi-pin-fill" : "bi bi-pin"}></i>
           </button>
         ) : (
           <></>
@@ -65,13 +64,22 @@ function Notes({ id, title, text, isPinned }) {
       </div>
       <div className="flex flex-col">
         <p>{text}</p>
-        <div className="ml-auto flex gap-2">
-          <button onClick={onArchiveClick}>
-            <span className="material-symbols-outlined">archive</span>
+        <div className="flex justify-between">
+          <div>
+            <small>{date}</small>
+          </div>
+          <div className="ml-auto flex gap-2">
+          { !isRemoved ? (
+            <button onClick={onArchiveClick} className="hover:scale-105">
+              <i className={isArchived ? "bi bi-box-arrow-in-down" : "bi bi-archive-fill"} style={{ fontSize: "1.5rem" }}></i>
+            </button>
+          ) : (
+            <></>
+          )}
+          <button onClick={!isArchived ? onBinClick : archiveToBinClick} className="hover:scale-105">
+            <i className={isRemoved ? "bi bi-house-door-fill" : "bi bi-trash-fill"} style={{ fontSize: "1.5rem" }}></i>
           </button>
-          <button onClick={onBinClick}>
-            <span className="material-symbols-outlined">delete</span>
-          </button>
+        </div>
         </div>
       </div>
     </div>
