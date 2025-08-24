@@ -18,7 +18,7 @@ Easily create, manage, and delete notes with a smooth and responsive UI.
 ## 📸 Screenshots  
 
 ### 🏠 Homepage  
-![Homepage Screenshot](./src/screenshots/homePage.png)  
+![Homepage Screenshot](./src/screenshots/homePage.png)
 
 ### 📂 Archive Page  
 ![Archivepage Screenshot](./src/screenshots/archivePage.png)  
