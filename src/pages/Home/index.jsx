@@ -6,7 +6,7 @@ import Notes from "../../components/Notes";
 import { useAppContext } from "../../context/appContext";
 
 export const Home = () => {
-  const { notes, archive } = useAppContext();
+  const { notes } = useAppContext();
   const pinnedNotes = notes?.length > 0 ? notes.filter(({ isPinned }) => isPinned) : [];
   const unPinnedNotes = notes?.length > 0 ? notes.filter(({ isPinned }) => !isPinned) : [];
 
@@ -14,7 +14,7 @@ export const Home = () => {
     <Fragment>
       <Navbar />
       <main className="flex gap-3">
-        <Sidebar />
+        <Sidebar className="w-36" />
         <div className="flex flex-col">
           <CreateNote />
           <div className="ml-10">
