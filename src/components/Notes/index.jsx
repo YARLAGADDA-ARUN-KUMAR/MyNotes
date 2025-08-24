@@ -53,7 +53,7 @@ function Notes({ id, title, text, isPinned }) {
   return (
     <div className="min-w-[300px] border-2 border-gray-400 px-2 rounded-md h-fit">
       <div className="flex justify-between border-b-2">
-        <p>{title}</p>
+        <p className="font-bold">{title}</p>
         {!isArchived && !isRemoved ? (
           <button onClick={onPinClick} className="hover:scale-105">
             <i style={{ fontSize: "1.5rem" , padding: "0rem 0rem 0rem 1rem" }} className={isPinned ? "bi bi-pin-fill" : "bi bi-pin"}></i>
@@ -64,7 +64,7 @@ function Notes({ id, title, text, isPinned }) {
       </div>
       <div className="flex flex-col">
         <p>{text}</p>
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-2">
           <div>
             <small>{date}</small>
           </div>
