@@ -38,7 +38,7 @@ function Notes({ id, title, text, isPinned }) {
           payload: { id },
         })
       : notesDispatch({
-          type: "REMOVE_FROM_BIN",
+          type: "RESTORE_TO_HOME",
           payload: { id },
         });
   };
@@ -49,6 +49,13 @@ function Notes({ id, title, text, isPinned }) {
       payload: { id },
     });
   };
+
+  const onBinClickPermanatly = () =>{
+    notesDispatch({
+      type: "DELETE_PERMANENTLY",
+      payload: { id },
+    })
+  }
 
   return (
     <div className="min-w-[300px] border-2 border-gray-400 px-2 rounded-md h-fit">
@@ -69,15 +76,16 @@ function Notes({ id, title, text, isPinned }) {
             <small>{date}</small>
           </div>
           <div className="ml-auto flex gap-2">
-          { !isRemoved ? (
-            <button onClick={onArchiveClick} className="hover:scale-105">
-              <i className={isArchived ? "bi bi-box-arrow-in-down" : "bi bi-archive-fill"} style={{ fontSize: "1.5rem" }}></i>
+            <button onClick={isRemoved ? onBinClickPermanatly : onArchiveClick} className="hover:scale-105">
+              {
+                isRemoved ? (
+                  <i className="bi bi-trash-fill" style={{ fontSize: "1.5rem" }}></i>
+                ) :
+                <i className={isArchived ? "bi bi-box-arrow-in-down" : "bi bi-archive-fill"} style={{ fontSize: "1.5rem" }}></i>
+              }
             </button>
-          ) : (
-            <></>
-          )}
           <button onClick={!isArchived ? onBinClick : archiveToBinClick} className="hover:scale-105">
-            <i className={isRemoved ? "bi bi-house-door-fill" : "bi bi-trash-fill"} style={{ fontSize: "1.5rem" }}></i>
+            <i className={isRemoved ? "bi bi-arrow-counterclockwise" : "bi bi-trash-fill"} style={{ fontSize: "1.5rem" }}></i>
           </button>
         </div>
         </div>

@@ -12,7 +12,7 @@ function Archive() {
     <Fragment>
       <Navbar />
       <main className="flex">
-        <Sidebar />
+        <Sidebar className="w-36" />
         <div>
           <div className="ml-10">
             {archive?.length > 0 && (

@@ -11,7 +11,7 @@ export const Bin = () => {
     <Fragment>
       <Navbar />
       <main className="flex">
-        <Sidebar />
+        <Sidebar className="w-36" />
         <div>
           <div className="ml-10">
             {bin?.length > 0 && (
